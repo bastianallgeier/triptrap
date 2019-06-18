@@ -31,6 +31,7 @@
               <span class="k-toolbar-divider" />
 
               <k-button :class="{ 'is-active': isActive.link() }" class="k-toolbar-button" icon="url" @click="openLinkDialog(getMarkAttrs('link'))" />
+              <k-button :class="{ 'is-active': isActive.image() }" class="k-toolbar-button" icon="attachment" @click="selectFile" />
 
             </div>
           </div>
@@ -41,6 +42,8 @@
       <k-dialog ref="link" button="Insert" @submit="$refs.linkForm.submit()">
         <k-form ref="linkForm" :fields="$options.linkFields" @submit="insertLink" v-model="linkModel" />
       </k-dialog>
+
+      <k-files-dialog ref="fileDialog" @cancel="cancel" @submit="insertFile" />
 
     </k-input>
   </k-field>
@@ -60,7 +63,6 @@ import {
   ListItem,
   Bold,
   Code,
-  Image,
   Italic,
   Link,
   Strike,
@@ -68,6 +70,7 @@ import {
   History,
 } from 'tiptap-extensions';
 
+import Image from "../nodes/Image.js";
 
 export default {
   inheritAttrs: false,
@@ -131,6 +134,7 @@ export default {
   props: {
     label: String,
     name: String,
+    endpoints: Object,
     value: String
   },
   data() {
@@ -139,6 +143,8 @@ export default {
       linkModel: {
         url: null
       },
+      json: null,
+      html: null,
       editor: new Editor({
         extensions: [
           new Blockquote(),
@@ -158,36 +164,37 @@ export default {
           new Underline(),
           new History(),
         ],
-        content: this.value
+        content: this.value,
+        onUpdate: ({ getJSON, getHTML }) => {
+          this.json = getJSON()
+          this.html = getHTML()
+        },
       }),
-    }
-  },
-  computed: {
-    html() {
-      return this.editor.getHTML();
-    },
-    json() {
-      return this.editor.getJSON();
     }
   },
   watch: {
     "editor.isActive"() {
       this.activeBlock = this.getActiveBlock();
     },
-    html(value) {
-      this.$emit("input", value);
+    json(value) {
+      this.$emit("input", this.json);
       this.activeBlock = this.getActiveBlock();
     },
     value(value) {
-      if (value !== this.html) {
-        this.editor.setContent(value);
-      }
+      // if (value !== this.json) {
+      //   this.editor.setContent(value);
+      // }
     }
   },
   beforeDestroy() {
     this.editor.destroy()
   },
   methods: {
+    insertFile(files) {
+      if (files && files.length > 0) {
+        this.editor.commands.image({ src: files[0].url, filename: files[0].filename })
+      }
+    },
     insertLink(values) {
       const href = values.url.length === 0 ? null : values.url;
       this.editor.commands.link({ href : href });
@@ -209,6 +216,12 @@ export default {
 
       return activeBlock;
     },
+    selectFile() {
+      this.$refs.fileDialog.open({
+        endpoint: this.endpoints.field + "/files",
+        multiple: false
+      });
+    },
     turnInto(block, args) {
       Object.keys(this.editor.isActive).forEach(check => {
         if (this.editor.isActive[check]() === true) {
@@ -223,7 +236,9 @@ export default {
       }
     },
     onClick() {
-      this.$refs.blocks.close();
+      if (this.$refs.blocks) {
+        this.$refs.blocks.close();
+      }
     }
   }
 };
@@ -363,8 +378,33 @@ $color-focus: #4271ae;
   width: 100%;
   margin: .75rem 0;
 }
-.ProseMirror.ProseMirror-hideselection .ProseMirror-selectednode {
-  outline: 2px solid #b5d7fe;
-  outline-offset: 2px;
+.ProseMirror .image {
+  line-height: 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  border: 2px solid #efefef;
 }
+.ProseMirror .image img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  margin: 4px;
+  padding: 0;
+  margin-right: .75rem;
+}
+.ProseMirror .image img::selection { background: transparent; }
+.ProseMirror .image figcaption {
+  font-size: .875rem;
+  color: $color-focus;
+  text-decoration: underline;
+}
+.ProseMirror .image figcaption::selection {
+  background: transparent;
+}
+.ProseMirror.ProseMirror-hideselection .image.ProseMirror-selectednode {
+  border-color: rgba($color-focus, .25);
+}
+
+
 </style>
