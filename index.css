@@ -1,1 +1,128 @@
-.k-editor{position:relative}.k-editor .k-toolbar{height:37px}.k-editor:focus-within .k-toolbar{position:sticky;top:0;right:0;left:0;z-index:1;box-shadow:0 2px 5px rgba(0,0,0,.05);border-bottom:1px solid rgba(0,0,0,.1);color:#000}.k-editor:focus-within .k-toolbar-button.is-active{color:#4271ae}.k-editor .k-toolbar-button{font-size:.875rem;width:auto;padding:0 .5rem;display:flex;align-items:center}.ProseMirror{padding:.5rem;background:#fff;line-height:1.5rem}.ProseMirror:focus{outline:0}.ProseMirror>:last-child{margin-bottom:0}.ProseMirror a{color:#4271ae;text-decoration:underline;pointer-events:none}.ProseMirror>p,.ProseMirror h1{margin-bottom:1.5rem}.ProseMirror h1{font-size:1.75rem}.ProseMirror h2{font-size:1.25rem;margin-bottom:.75rem}.ProseMirror h3{font-size:1rem}.ProseMirror code{position:relative;font-size:.875rem;display:inline-block;line-height:1.325;padding:.05em .5em;background:rgba(0,0,0,.1)}.ProseMirror code,.ProseMirror pre{border-radius:3px;font-family:SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace}.ProseMirror pre{background:#2d2e36;padding:1rem!important;margin:1.5rem 0}.ProseMirror pre code{background:none;line-height:1.5em;color:#fff;display:block;padding:0}.ProseMirror ol,.ProseMirror ul{margin-left:1.25rem;margin-bottom:1.5rem}.ProseMirror ul>li{list-style:disc}.ProseMirror ol>li{list-style:decimal}.ProseMirror li{margin-bottom:0}.ProseMirror blockquote{font-size:1.25rem;line-height:1.125em!important;padding:0 0 0 1rem!important;margin-top:1.5rem;margin-bottom:1.5rem;border-left:4px solid #000}.ProseMirror hr{position:relative;border:0;height:1px;color:rgba(0,0,0,.125);margin-bottom:1.5rem}.ProseMirror hr:after{position:absolute;top:0;left:0;right:0;height:1px;background:currentColor;content:""}.ProseMirror hr{background:#efefef}.ProseMirror img{width:100%;margin:.75rem 0}.ProseMirror.ProseMirror-hideselection .ProseMirror-selectednode{outline:2px solid #b5d7fe;outline-offset:2px}
+.k-editor {
+  position: relative; }
+
+.k-editor .k-toolbar {
+  height: 37px; }
+
+.k-editor:focus-within .k-toolbar {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.05) 0 2px 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000; }
+
+.k-editor:focus-within .k-toolbar-button.is-active {
+  color: #4271ae; }
+
+.k-editor .k-toolbar-button {
+  font-size: .875rem;
+  width: auto;
+  padding: 0 .5rem;
+  display: flex;
+  align-items: center; }
+
+.ProseMirror {
+  padding: .5rem;
+  background: #fff;
+  line-height: 1.5rem; }
+
+.ProseMirror:focus {
+  outline: 0; }
+
+.ProseMirror > *:last-child {
+  margin-bottom: 0; }
+
+.ProseMirror a {
+  color: #4271ae;
+  text-decoration: underline;
+  pointer-events: none; }
+
+.ProseMirror h1,
+.ProseMirror > p {
+  margin-bottom: 1.5rem; }
+
+.ProseMirror h1 {
+  font-size: 1.75rem; }
+
+.ProseMirror h2 {
+  font-size: 1.25rem;
+  margin-bottom: .75rem; }
+
+.ProseMirror h3 {
+  font-size: 1rem; }
+
+.ProseMirror code {
+  position: relative;
+  font-size: .875rem;
+  display: inline-block;
+  line-height: 1.325;
+  padding: .05em .5em;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
+
+.ProseMirror pre {
+  background: #2d2e36;
+  padding: 1rem !important;
+  margin: 1.5rem 0;
+  border-radius: 3px;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; }
+
+.ProseMirror pre code {
+  background: none;
+  line-height: 1.5em;
+  color: #fff;
+  display: block;
+  padding: 0; }
+
+.ProseMirror ul,
+.ProseMirror ol {
+  margin-left: 1.25rem;
+  margin-bottom: 1.5rem; }
+
+.ProseMirror ul > li {
+  list-style: disc; }
+
+.ProseMirror ol > li {
+  list-style: decimal; }
+
+.ProseMirror li {
+  margin-bottom: 0; }
+
+.ProseMirror blockquote {
+  font-size: 1.25rem;
+  line-height: 1.125em !important;
+  padding: 0 0 0 1rem !important;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #000; }
+
+.ProseMirror hr {
+  position: relative;
+  border: 0;
+  height: 1px;
+  color: rgba(0, 0, 0, 0.125);
+  margin-bottom: 1.5rem; }
+
+.ProseMirror hr::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: currentColor;
+  content: ""; }
+
+.ProseMirror hr {
+  background: #efefef; }
+
+.ProseMirror img {
+  width: 100%;
+  margin: .75rem 0; }
+
+.ProseMirror.ProseMirror-hideselection .ProseMirror-selectednode {
+  outline: 2px solid #b5d7fe;
+  outline-offset: 2px; }
